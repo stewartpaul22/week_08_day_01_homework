@@ -27,6 +27,9 @@ public class Runner {
         book2.setTitle("The Hitchhiker's Guide to Eating Galaxies");
         DBBook.updateBook(book2);
 
+        author1.setFirstName("J");
+        DBAuthor.updateAuthor(author1);
+
         List<Book> books = DBBook.getBooks();
 
         List<Author> authors = DBAuthor.getAuthors();

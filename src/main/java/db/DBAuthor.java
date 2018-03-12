@@ -1,6 +1,7 @@
 package db;
 
 import models.Author;
+import models.Book;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -29,21 +30,6 @@ public class DBAuthor {
 
     }
 
-    public static void deleteAll(){
-        session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            transaction = session.beginTransaction();
-            String hql = "delete from Author";
-            Query query = session.createQuery(hql);
-            query.executeUpdate();
-        } catch (HibernateException e){
-            transaction.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
     public static List<Author> getAuthors() {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Author> authors = null;
@@ -59,6 +45,37 @@ public class DBAuthor {
             session.close();
         }
         return authors;
+    }
+
+    public static void updateAuthor(Author author) {
+
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            transaction = session.beginTransaction();
+            session.update(author);
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+    }
+
+    public static void deleteAll(){
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            transaction = session.beginTransaction();
+            String hql = "delete from Author";
+            Query query = session.createQuery(hql);
+            query.executeUpdate();
+        } catch (HibernateException e){
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
 }
