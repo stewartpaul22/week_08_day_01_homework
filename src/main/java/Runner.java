@@ -24,6 +24,9 @@ public class Runner {
         Book book2 = new Book("The Hitchhiker's Guide to the Galaxy", author2);
         DBBook.saveBook(book2);
 
+        Book book3 = new Book("The Second Coming", author1);
+        DBBook.saveBook(book3);
+
         book2.setTitle("The Hitchhiker's Guide to Eating Galaxies");
         DBBook.updateBook(book2);
 
@@ -33,6 +36,8 @@ public class Runner {
         List<Book> books = DBBook.getBooks();
 
         List<Author> authors = DBAuthor.getAuthors();
+
+        List<Book> booksByAuthors = DBAuthor.getBooks(author1.getId());
 
     }
 
